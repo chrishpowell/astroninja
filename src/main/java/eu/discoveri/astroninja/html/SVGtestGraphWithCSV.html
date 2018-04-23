@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .node circle {fill:lightgrey; stroke:steelblue; stroke-width:1px;}
+            .link {fill:none; stroke:#ccc; stroke-width:2px;}
+            text
+            {
+                text-anchor: middle;
+                font-family: sans-serif;
+                fill: black;
+                font-size: 14px;
+            }
+        </style>
+        <script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div>Force</div>
+        <svg width="500" height="400" style="border:1px solid red; padding-top:20px">
+            <g class="link"></g>
+            <g class="node"></g>
+        </svg>
+
+        <script>
+            //... Outline the SVG
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+            var edges = svg.select(".link"),
+                nodes = svg.select(".node");
+
+            d3.json('users.json', function(entities)
+            {
+                var simulation = d3.forceSimulation(entities.vertexes)
+                    .force('charge', d3.forceManyBody().strength(-90))
+                    .force('center', d3.forceCenter(width / 2, height / 2))
+                    .force('link', d3.forceLink().links(entities.links).distance(85))
+                    .force('collide', d3.forceCollide(15))
+                    .on('tick', ticked);
+
+                var e = d3.select(".link").selectAll("line")
+                        .data(entities.links)
+                        .enter()
+                        .append("line");
+
+                var n = d3.select('.node').selectAll('circle')
+                        .data(entities.vertexes)
+                        .enter()
+                        .append("g");
+                n.append('circle')
+                    .attr('r', d => d.r)
+                    .style("fill",d=>d.fill)
+                    .style("stroke",d=>d.stroke);
+                n.append("text")
+                    .attr("dy",".35em")
+                    .text(d => d.name);
+
+                function ticked()
+                {
+                    e.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+                     .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+                    n.attr("transform", d => "translate("+d.x+","+d.y+")");
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+{ "vertexes":[
+    {"name":"Dragisa","r": 12,"stroke":"red","fill":"steelblue","ntype":"user"},
+    {"name":"Arkady","r":10,"ntype":"user"},
+    {"name":"Georgina","r":10,"ntype":"user"},
+    {"name":"Henry","r":10,"ntype":"user"},
+    {"name":"Chris","r":10,"ntype":"user"},
+    {"name":"Pisces","r":7,"fill":"lightskyblue","ntype":"tag"},
+    {"name":"French wine","r":7,"fill":"lightskyblue","ntype":"tag"},
+    {"name":"Leo","r":7,"fill":"lightskyblue","ntype":"tag"},
+    {"name":"","r":4,"fill":"red","ntype":"unknown"}
+  ],
+  "links":[
+    {"source":0,"target":1,"etype":"follows"},
+    {"source":0,"target":2,"etype":"follows"},
+    {"source":2,"target":3,"etype":"follows"},
+    {"source":2,"target":4,"etype":"follows"},
+    {"source":1,"target":7,"etype":"tag"},
+    {"source":4,"target":5,"etype":"tag"},
+    {"source":4,"target":6,"etype":"tag"}
+  ]
+}

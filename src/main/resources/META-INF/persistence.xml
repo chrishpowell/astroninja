@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2014 Chris Powell
+-->
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <!-- Astro test (with drop) -->
+  <persistence-unit name="astrodroptest_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>com.objectdb.jpa.Provider</provider>
+    <class>eu.discoveri.astroninja.graph.GraphObjectImpl</class>
+    <class>eu.discoveri.astroninja.vertex.GraphVertex</class>
+    <class>eu.discoveri.astroninja.edge.GraphEdge</class>
+    <class>eu.discoveri.astroninja.example.vertex.PersonImpl</class>
+    <class>eu.discoveri.astroninja.example.entity.AbstractPerson</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="objectdb://localhost/astro1.tmp;drop"/>
+      <property name="javax.persistence.jdbc.user" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>  [JPA2.1] ObjectDB is 2.0? (still) -->
+    </properties>
+  </persistence-unit>
+  <!-- Astro test -->
+  <persistence-unit name="astrotest_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>com.objectdb.jpa.Provider</provider>
+    <class>eu.discoveri.astroninja.Point</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="objectdb://localhost/astro2.tmp;drop"/>
+      <property name="javax.persistence.jdbc.user" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>  [JPA2.1] ObjectDB is 2.0 (still) -->
+    </properties>
+  </persistence-unit>
+  <!-- Astro test -->
+  <persistence-unit name="astroindextest_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>com.objectdb.jpa.Provider</provider>
+    <class>eu.discoveri.astroninja.location.Location</class>
+    <class>eu.discoveri.astroninja.location.Country</class>
+    <class>eu.discoveri.astroninja.location.Coordinates</class>
+    <class>eu.discoveri.astroninja.entity.Language</class>
+    <class>eu.discoveri.astroninja.location.CtrySubDiv</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="objectdb://localhost/astroidx.tmp;drop"/>
+      <property name="javax.persistence.jdbc.user" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>  [JPA2.1] ObjectDB is 2.0 (still) -->
+    </properties>
+  </persistence-unit>
+  <!-- Astro test -->
+  <persistence-unit name="Test_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>com.objectdb.jpa.Provider</provider>
+    <class>eu.discoveri.astroninja.example.main.MyEntity</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="objectdb://localhost/test.tmp;drop"/>
+      <property name="javax.persistence.jdbc.user" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+    </properties>
+  </persistence-unit>
+  <!-- Base ObjectDB test: eu.discoveri.astroninja.Main -->
+  <persistence-unit name="astrotesttest_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>com.objectdb.jpa.Provider</provider>
+    <class>eu.discoveri.astroninja.Point</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="objectdb://localhost/astro1.tmp"/>
+      <property name="javax.persistence.jdbc.user" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!-- [JPA2.1] -->
+    </properties>
+  </persistence-unit>
+  <!-- This'll be the RC version (paid?) -->
+  <persistence-unit name="astroRC_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>com.objectdb.jpa.Provider</provider>
+    <class>eu.discoveri.astroninja.Point</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="objectdb://localhost/astro1.odb"/>
+      <property name="javax.persistence.jdbc.user" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+    </properties>
+  </persistence-unit>
+  <!-- Some random classes for testing (Versant) -->
+  <persistence-unit name="random_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>com.objectdb.jpa.Provider</provider>
+    <class>gexample.absvertex.AbstractPerson</class>
+    <class>gexample.vertex.PersonImpl</class>
+    <class>gexample.vertex.FollowsTag</class>
+    <class>gexample.vertex.Department</class>
+    <class>gexample.vertex.CompanyHQ</class>
+    <class>gexample.entity.Phone</class>
+    <class>gexample.edge.Directs</class>
+    <class>gexample.edge.Tags</class>
+    <class>gexample.edge.Follows</class>
+    <class>gexample.edge.Manages</class>
+    <class>eu.discoveri.astroninja.edge.GraphEdge</class>
+    <class>eu.discoveri.astroninja.graph.GraphObjectImpl</class>
+    <class>eu.discoveri.astroninja.vertex.GraphVertex</class>
+    <properties>
+      <property name="versant.connectionURL" value="crispi@localhost"/>
+      <property name="versant.username" value="dbsa"/>
+      <property name="versant.password" value="karabiner"/>
+    </properties>
+  </persistence-unit>
+</persistence>

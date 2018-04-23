@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+    <head>
+        <title>Grid test 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            * {box-sizing: border-box;}
+            .container {
+                max-width: 1050px;
+                margin: 0 auto;
+            }
+            .container > div {
+                border: 2px solid rgb(233,171,88);
+                background-color: rgba(233,171,88,.5);
+                padding: 1em;
+                color: #d9480f;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 5px;
+                grid-auto-rows: minmax(100px, auto);
+            }
+            .logo {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            .top { 
+                grid-column: 2 / 4;
+                grid-row: 1;
+            }
+            .left {
+                grid-column: 1;
+                grid-row: 2 / 5;
+            }
+            .right {
+                grid-column: 3;
+                grid-row: 2 / 5;
+            }
+            .main {
+                grid-column: 2;
+                grid-row: 2 / 5;
+            }
+        </style>
+    </head>
+    <body>
+        <div>Boxes</div>
+
+        <div class="container">
+            <div class="logo">logo</div>
+            <div class="top">top</div>
+            <div class="left">Left</div>
+            <div class="right">Right</div>
+            <div class="main">Main</div>
+        </div>
+    </body>
+</html>

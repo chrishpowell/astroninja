@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+    <head>
+        <title>Nodes on top</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Start</div>
+        <svg width="250" height="250" style="border:1px solid red;"></svg>
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script>
+            var circData = [ {"xaxis":25,"yaxis":15,"r":7,"color":"red"},
+                            {"xaxis":55,"yaxis":45,"r":7,"color":"green"},
+                            {"xaxis":85,"yaxis":95,"r":7,"color":"blue"}
+                          ];
+            var lineData = [ {"x1":circData[0].xaxis,"y1":circData[0].yaxis,"x2":circData[1].xaxis,"y2":circData[1].yaxis},
+                             {"x1":circData[1].xaxis,"y1":circData[1].yaxis,"x2":circData[2].xaxis,"y2":circData[2].yaxis} ];
+            
+            var svg = d3.select("svg");
+            svg.append("g").attr("id","edges");
+            // Make sure nodes on top
+            svg.append("g").attr("id","nodes");
+            
+            svg.select("#nodes").selectAll("circle")
+                .data(circData)
+                .enter()
+                .append("circle")
+                .attr("cx", function(d){return d.xaxis;})
+                .attr("cy", function(d){return d.yaxis;})
+                .attr("r", function(d){return d.r;})
+                .style("fill", function(d){return d.color;});
+            svg.select("#edges").selectAll("line")
+                .data(lineData)
+                .enter()
+                .append("line")
+                .attr("x1",function(d){return d.x1;}).attr("x2",function(d){return d.x2;})
+                .attr("y1",function(d){return d.y1;}).attr("y2",function(d){return d.y2;})
+                .attr("stroke-width",2).attr("stroke","black");
+        </script>
+    </body>
+</html>

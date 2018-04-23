@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+    <head>
+        <title>Hierarchy</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .node circle {fill:lightgrey; stroke:steelblue; stroke-width:1px;}
+            .node text {font:12px sans-serif;}
+            .link {fill:none; stroke:#ccc; stroke-width:2px;}
+        </style>
+        <script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div>[Hierarchy, d3:v4]</div>
+        
+        <!-- Note: Padding to enable root node to show at top -->
+        <svg width="500" height="400" style="border:1px solid red; padding-top:20px">
+            <g class="link"></g>
+            <g class="node"></g>
+        </svg>
+        
+        <script>
+            //... Outline the SVG
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+            var edges = svg.select(".link"),
+                nodes = svg.select(".node");
+
+            // Vertexes/nodes.  No attribute, default style is used.  ntype is not used here
+            var vertexes = [
+                {name: "Freda", parent: "", r: 10, stroke:"red", fill: "steelblue", ntype: "user"},
+                {name: "Bill", parent: "Freda", r: 8, ntype: "user"},
+                {name: "Georgina", parent: "Freda", r: 8, ntype: "user"},
+                {name: "Tabitha", parent: "Georgina", r: 8, ntype: "user"},
+                {name: "Marmaduke", parent: "Georgina", r: 8, ntype: "user"},
+                {name: "Henry", parent: "Bill", r: 8, ntype: "user"},
+                {name: "Arkady", parent: "Henry", r: 8, ntype: "user"},
+                {name: "[tag-1]", parent: "Marmaduke", r: 5, stroke:"black", fill: "white", ntype: "tag"},
+                {name: "[tag-2]", parent: "Marmaduke", r: 5, stroke:"black", fill: "white", ntype: "tag"}
+            ];
+
+            //... Form the (physical) tree structure
+            // Make id from name
+            var root = d3.stratify()
+                    .id(d => d.name)
+                    .parentId(d => d.parent)
+                    (vertexes);
+            // Determine the links/edges, make sure fits in svg box
+            var tree = d3.tree().size([height, width - 150])(root);
+
+            //... To SVG
+            // Add 'g's at each node as we want circles and text for nodes
+            var n = nodes.selectAll(".node")
+                    .data(root.descendants())
+                    .enter()
+                    .append("g")
+                        .attr("transform",function(d){return "translate("+d.x+","+d.y+")";});
+            // Add circles to 'g's (nodes)
+            n.append("circle")
+                .attr("r",d=>d.data.r)
+                .style("fill",d=>d.data.fill)
+                .style("stroke",d=>d.data.stroke);
+            // Add text to 'g's (Note:name has become id) and move along a touch
+            n.append("text")
+                .attr("dx",".75em")
+                .text(d => d.id);
+        
+            // Write links/edges between nodes
+            edges.selectAll(".link")
+                .data(tree.links())
+                .enter()
+                .append("path")
+                    .attr("d", d3.linkVertical().x(d => d.x).y(d => d.y));
+        </script>
+    </body>
+</html>

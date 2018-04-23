@@ -1,0 +1,28 @@
+{"vertexes":[
+    {"vname":"Powell,Chris","canRename":true,"canDelete":true,"fill":"steelblue","stroke":"blue","defRadiusDT":10,"defRadiusMD":6,"firstName":"Chris","lastName":"Powell","palias":"crispy","midName1":"","midName2":"","phones":null,"accState":"ACTIVE","id":"3","createDate":1521983077439,"updateDate":null},
+    {"vname":"Houdini,Harry","canRename":true,"canDelete":true,"fill":"lightgray","stroke":"black","defRadiusDT":9,"defRadiusMD":6,"firstName":"Harry","lastName":"Houdini","palias":"houdin","midName1":"","midName2":"","phones":null,"accState":"ACTIVE","id":"4","createDate":1521983077541,"updateDate":null},
+    {"vname":"Albert,Einstein","canRename":true,"canDelete":true,"fill":"lightgray","stroke":"black","defRadiusDT":9,"defRadiusMD":6,"firstName":"Einstein","lastName":"Albert","palias":"ae","midName1":"","midName2":"","phones":null,"accState":"ACTIVE","id":"5","createDate":1521983077541,"updateDate":null},
+    {"vname":"Andrei,Adi","canRename":true,"canDelete":true,"fill":"lightgray","stroke":"black","defRadiusDT":9,"defRadiusMD":6,"firstName":"Adi","lastName":"Andrei","palias":"aa","midName1":"","midName2":"","phones":null,"accState":"ACTIVE","id":"6","createDate":1521983077542,"updateDate":null},
+    {"vname":"Powell,Adrian","canRename":true,"canDelete":true,"fill":"lightgray","stroke":"black","defRadiusDT":9,"defRadiusMD":6,"firstName":"Adrian","lastName":"Powell","palias":"ap","midName1":"","midName2":"","phones":null,"accState":"ACTIVE","id":"7","createDate":1521983077542,"updateDate":null},
+    {"vname":"Silver,Long","canRename":true,"canDelete":true,"fill":"lightgray","stroke":"black","defRadiusDT":9,"defRadiusMD":6,"firstName":"Long","lastName":"Silver","palias":"ap","midName1":"John","midName2":"","phones":null,"accState":"ACTIVE","id":"8","createDate":1521983077542,"updateDate":null},
+    {"vname":"Corovic,Dragisa","canRename":true,"canDelete":true,"r":12,"stroke":"red","phones":[{"name":"w1"},{"name":"w2"}],"fill":"steelblue","ntype":"user"},
+    {"vname":"Arkady,Andrei","canRename":true,"canDelete":true,"r":10,"phones":null,"ntype":"user","createDate":1521983077541,"updateDate":null},
+    {"vname":"Georgina","midname":"","id":1,"r":10,"ntype":"user"},
+    {"vname":"Henry","r":10,"ntype":"user"},
+    {"vname":"Chris","r":10,"ntype":"user"},
+    {"vname":"Pisces","r":7,"fill":"lightskyblue","ntype":"tag"},
+    {"vname":"French wine","r":7,"fill":"lightskyblue","ntype":"tag"},
+    {"vname":"Leo","r":7,"fill":"lightskyblue","ntype":"tag"},
+    {"vname":"","r":4,"fill":"red","ntype":"unknown"}
+  ],
+  "links":[
+    {"source":"Corovic,Dragisa","target":"Arkady,Andrei","fill":"gray","etype":"Follows"},
+    {"source":"Powell,Chris","target":"Houdini,Harry","fill":"gray","etype":"Follows"},
+    {"source":"Corovic,Dragisa","target":"Georgina","etype":"follows"},
+    {"source":"Georgina","target":"Henry","etype":"follows"},
+    {"source":"Georgina","target":"Chris","etype":"follows"},
+    {"source":"Arkady,Andrei","target":"Leo","etype":"tag"},
+    {"source":"Chris","target":"Pisces","etype":"tag"},
+    {"source":"Chris","target":"French wine","etype":"tag"}
+  ]
+}

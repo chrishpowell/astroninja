@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+<head>
+    <title>Star Chart</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .container {
+            width: 1200px;
+            height: 750px;
+            border: solid 1px #CCC;
+            margin: auto;
+            background: midnightblue;
+            -webkit-perspective: 600px;
+            perspective: 600px;
+        }
+        .sky {
+            width: 100%;
+            height: 100%;
+            -webkit-transform-style: preserve-3d;
+            transform-style:preserve-3d;
+            -webkit-transform: translate3d(500px,250px,0);
+            transform: translate3d(500px,250px,0);
+            -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+            -webkit-transition: -webkit-transform 4s;
+            transition: transform 4s;
+        }
+        .star {
+            width: 30px;
+            height: 30px;
+            /*background-color: yellow;*/
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background-image:url('circle-blue-30x30.png');
+            background-repeat:no-repeat;
+            background-position:center;
+            cursor:pointer;
+            color:white;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<h1>Predikt.io</h1>
+<div class="container">
+    <div id="sky" class="sky">
+    </div>
+</div>
+
+<script>
+    // starTable: id, properName, magnitude, spectralType, BVcolorIndex,rightAscension,declination
+    var starTable = [["1","Rigel",0.18,"A0m...",-0.03,"5.242298","-8.20164"],["2","Betelguese",0.45,"A0m...",1.85,"5.919529","7.407063"],["3","Bellatrix",1.64,"A0m...",-0.21,"5.418851","6.349702"],["4","Alnilam",1.69,"A0m...",-0.18,"5.603559","-1.20192"],["5","Alnitak",1.74,"A0m...",-0.15,"5.679313","-1.942572"],["6","Saiph",2.07,"A0m...",-0.18,"5.795941","-9.669605"],["7","Mintaka",2.25,"A0m...",-0.22,"5.533445","-0.299092"],["8","Hatsya",2.75,"A0m...",-0.24,"5.590551","-5.909901"],["9","28Eta",3.35,"A0m...",-0.17,"5.407949","-2.397146"]];
+    var centerStarOnClick = function(starEl,star){
+        starEl.onclick = function(){
+            sky.style.webkitTransform =
+              sky.style.transform = "translate3d(500px,250px,0) rotateX(" + star.declination + "deg) rotateY("
+                    + -star.azimuth + "deg)";
+        };
+    };
+
+    var sky = document.getElementById("sky");
+    var pogsonsRatio = 2.512; // 5th root of 100 see http://en.wikipedia.org/wiki/Apparent_magnitude
+
+    var stars = [];
+    for (var i = 0; i < starTable.length; i++){
+        var s = starTable[i];
+        var star = {
+            id:s[0],
+            properName:s[1],
+            magnitude:s[2],
+            spectralType:s[3],
+            colorIndex:s[4],
+            rightAscension:s[5],
+            azimuth: parseFloat(s[5]) * 15, // convert hour angle to degrees
+            declination:s[6]
+        };
+        stars.push(star);
+        var starEl = document.createElement("div");
+        starEl.className = "star";
+        starEl.innerHTML = star.properName;
+
+        if( star.colorIndex < -0.15 ) { starEl.style.backgroundImage = "url('circle-blue-30x30.png')"; }
+        else if( star.colorIndex < 0.15 ) { starEl.style.backgroundImage = "url('circle-white-30x30.png')"; }
+        else if( star.colorIndex < 0.85 ) { starEl.style.backgroundImage = "url('circle-yellow-30x30.png')"; }
+        else if( star.colorIndex < 1.25 ) { starEl.style.backgroundImage = "url('circle-orange-30x30.png')"; }
+        else { starEl.style.backgroundImage = "url('circle-red-30x30.png')"; }
+
+        //starEl.style.webkitTransform = "translate3d(" + star.x + "px," + star.y + "px," + star.z + "px)";
+        var scaleForMagnitude = Math.pow(pogsonsRatio,-star.magnitude / 2); // divide by 2 since area of element follows inverse square law
+        starEl.style.webkitTransform =
+          starEl.style.transform = "rotateY(" + star.azimuth + "deg) rotateX(" + -star.declination
+                + "deg) scale3d(" + scaleForMagnitude +"," + scaleForMagnitude + ",1) translateZ(-500px)";
+        starEl.style.fontSize = (20 / scaleForMagnitude) + "px";
+        //starEl.style.top = star.y + "px";
+        centerStarOnClick(starEl,star);
+        sky.appendChild(starEl);
+    }
+
+    setTimeout(function(){
+        //sky.style.webkitTransform = "translate3d(500px,250px,0) rotateY(180deg)";
+    },1000);
+</script>
+
+</body>
+</html>

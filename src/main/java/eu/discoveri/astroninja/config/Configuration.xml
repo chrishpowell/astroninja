@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaseConfig xmlns="http://config.chrishpowell.com/bases"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            version="0.9">
+    <Database>
+        <DefPersistUnit>crispI_PU</DefPersistUnit>
+        <DbJSONExt>.json</DbJSONExt>
+        <VJPAxmlProp>versant.persistence.xml</VJPAxmlProp>
+    </Database>
+    <Config>
+        <LIndexing>
+            <Lindex1>Lindex-1</Lindex1>
+        </LIndexing>
+        <Logging>
+            <LoggingPropFile>C:\Users\crispy\Documents\NetBeansProjects\OurGraph\src\com\chrishpowell\utils\logging.properties</LoggingPropFile>
+            <Logger>crispi.logger</Logger>
+        </Logging>
+        <Security>
+            <DefSecRole>NotLoggedIn</DefSecRole>
+        </Security>
+        <Json>
+            <FailUnknownProps>false</FailUnknownProps>
+        </Json>
+    </Config>
+    <UIconfig>
+        <UIsecurity>
+            <AppSecure>true</AppSecure>
+        </UIsecurity>
+    </UIconfig>
+</BaseConfig>
+

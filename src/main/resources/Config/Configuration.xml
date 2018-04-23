@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaseConfig xmlns="http://config.chrishpowell.com/bases"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            version="0.9">
+    <Database>
+        <DefPersistUnit>astrodroptest_PU</DefPersistUnit>
+        <ConnectionURL>javax.persistence.jdbc.url</ConnectionURL>
+        <DbJSONExt></DbJSONExt>
+        <pJPAxmlProp></pJPAxmlProp>
+    </Database>
+    <Config>
+        <!-- Elastic search etc. -->
+        <LIndexing>
+            <Lindex1>Lindex-1</Lindex1>
+        </LIndexing>
+        <Logging>
+            <LoggingPropFile>/home/chrispowell/NetBeansProjects/AstroNinja/src/main/resources/Logging/logging.properties</LoggingPropFile>
+            <Logger>discoveri.logger</Logger>
+        </Logging>
+        <Security>
+            <DefSecRole>NotLoggedIn</DefSecRole>
+        </Security>
+        <!-- JSON and GraphQL (to be added) -->
+        <Json>
+            <FailUnknownProps>false</FailUnknownProps>
+        </Json>
+    </Config>
+    <UIconfig>
+        <UIsecurity>
+            <AppSecure>true</AppSecure>
+        </UIsecurity>
+    </UIconfig>
+</BaseConfig>

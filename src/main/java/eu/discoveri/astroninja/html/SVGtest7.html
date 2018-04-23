@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Start</div>
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script>
+            var theData = [1, 2, 3];
+            var p = d3.select("body").selectAll("p")
+                    .data(theData)
+                    .enter()
+                    .append("p")
+                    .text(function (d,i) {
+                        return "i = " +i+ ", d = " +d+ ", this = " +this;
+                    });
+        </script>
+    </body>
+</html>

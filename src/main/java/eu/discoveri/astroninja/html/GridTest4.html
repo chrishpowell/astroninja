@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+    <head>
+        <title>Grid test 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            * {box-sizing: border-box;}
+            .container {
+                max-width: 1050px;
+                margin: 0 auto;
+            }
+            .container > div {
+                border: 2px solid rgb(233,171,88);
+                background-color: rgba(233,171,88,.5);
+                padding: 1em;
+                color: #d9480f;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: 15% 750px 30%;
+                grid-gap: 5px;
+                grid-template-rows: 100px 450px 100px;
+            }
+            .logo {
+                grid-column: 1;
+                grid-row: 1;
+                padding:0; margin:0; border:0;
+            }
+            .top { 
+                grid-column: 2 / 4;
+                grid-row: 1;
+            }
+            .left {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            .right {
+                grid-column: 3;
+                grid-row: 2;
+            }
+            .main {
+                grid-column: 2;
+                grid-row: 2;
+            }
+            .bottom {
+                grid-column: 1 / 4;
+                grid-row: 3;
+            }
+
+            .rightBar{}
+            .rightLink{}
+            .mainBar{}
+            .mainLink{}
+            .leftPad p { padding-top:4px; }
+
+            .tab-half,.tab-third,.tab-quarter,.tab-fifth{float:left;width:100%;}
+            .tab-blue{color:blue;} .tab-lightblue{color:lightsteelblue;}
+            .tab-half{width:50%;padding:0} .tab-third{width:33.3333%;padding:0} .tab-quarter{width:25%;padding:0} .tab-fifth{width:20%;padding:0}
+            .tab-bottombar{border-bottom:6px solid #ccc!important}
+            .tab-border-red,.tab-hover-border-red:hover{border-color:#f44336!important}
+            .tab-light-grey,.tab-hover-light-grey:hover{color:#000!important;background-color:#f1f1f1!important}
+            .tabBloc:after,.tabBloc:before,.tab-row:after,.tab-row:before,.tab-row-padding:after,.tab-row-padding:before{content:"";display:table;clear:both}
+
+            html * { font-family: Arial !important; }
+        </style>
+        <script>
+            function openRight(evt, tabName)
+            {
+                var i, x, tablinks;
+                x = document.getElementsByClassName("rightBar");
+                for (i = 0; i < x.length; i++)
+                {
+                    x[i].style.display = "none";
+                }
+                
+                tablinks = document.getElementsByClassName("rightLink");
+                for (i = 0; i < x.length; i++)
+                {
+                    tablinks[i].className = tablinks[i].className.replace(" tab-border-red","").replace(" tab-blue","").replace(" tab-lightblue","");
+                    tablinks[i].className = tablinks[i].className += " tab-lightblue";
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.firstElementChild.className.replace(" tab-lightblue","");  // Can't do this!!!
+                evt.currentTarget.firstElementChild.className += " tab-border-red tab-blue"; // But can do this
+            }
+
+            function openMain(evt, tabName)
+            {
+                var i, x, tablinks;
+                x = document.getElementsByClassName("mainBar");
+                for (i = 0; i < x.length; i++)
+                {
+                    x[i].style.display = "none";
+                }
+                
+                tablinks = document.getElementsByClassName("mainLink");
+                for (i = 0; i < x.length; i++)
+                {
+                    tablinks[i].className = tablinks[i].className.replace(" tab-border-red","").replace(" tab-blue","").replace(" tab-lightblue","");
+                    tablinks[i].className = tablinks[i].className += " tab-lightblue";
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.firstElementChild.className.replace(" tab-lightblue","");  // Can't do this!!!
+                evt.currentTarget.firstElementChild.className += " tab-border-red tab-blue"; // But can do this
+            }
+        </script>
+    </head>
+    <body>
+        <div><h2>[AN layout]</h2></div>
+
+        <div class="container">
+            <div class="logo" style="align-content:center; padding:0; margin:0; border:0">
+                <img src="solar_system_2.jpg" alt="AstroNinja" style="width:157px;height:100px; margin:0; padding:0">
+            </div>
+            <div class="top">
+                <h2 style="font-style:italic;">Future Possibilities</h2>
+            </div>
+            <div class="left" style="color:blue; font-size:0.9em; padding-bottom:8px">
+                <p class="leftPad">Learn></p>
+                <p class="leftPad">Forum></p>
+                <p class="leftPad">Lorum></p>
+                <p class="leftPad">Ipsum></p>
+                <p class="leftPad">Etc.></p>
+            </div>
+            <div class="right">
+                <div class="tab-row">
+                    <a href="javascript:void(0)" onclick="openRight(event, 'news');">
+                        <div class="tab-half rightLink tab-border-red tab-blue tab-bottombar tab-hover-light-grey">News</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openRight(event, 'shop');">
+                        <div class="tab-half rightLink tab-lightblue tab-bottombar tab-hover-light-grey">Shop</div>
+                    </a>
+                </div>
+                <div id="news" class="tabBloc rightBar" style="display:none">
+                    <h3>News</h3>
+                    <p>News feed</p>
+                </div>
+                <div id="shop" class="tabBloc rightBar" style="display:none">
+                    <h3>Shop</h3>
+                    <p>Buy stuff</p>
+                </div>
+            </div>
+            <div class="main">
+                <div class="tab-row">
+                    <a href="javascript:void(0)" onclick="openMain(event, 'mypage');">
+                        <div class="tab-fifth mainLink tab-border-red tab-blue tab-bottombar tab-hover-light-grey">MyPage</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openMain(event, 'QnA');">
+                        <div class="tab-fifth mainLink tab-lightblue tab-bottombar tab-hover-light-grey">Q and A</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openMain(event, 'charts');">
+                        <div class="tab-fifth mainLink tab-lightblue tab-bottombar tab-hover-light-grey">Charts</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openMain(event, 'group');">
+                        <div class="tab-fifth mainLink tab-lightblue tab-bottombar tab-hover-light-grey">Group</div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="openMain(event, 'network');">
+                        <div class="tab-fifth mainLink tab-lightblue tab-bottombar tab-hover-light-grey">Network</div>
+                    </a>
+                </div>
+                <div id="mypage" class="tabBloc mainBar" style="display:none">
+                    <h3>MyPage</h3>
+                    <p>Stuff about me</p>
+                </div>
+                <div id="QnA" class="tabBloc mainBar" style="display:none">
+                    <h3>Q and A</h3>
+                    <p>AI system for answering questions</p>
+                </div>
+                <div id="charts" class="tabBloc mainBar" style="display:none">
+                    <h3>Charts</h3>
+                    <p>Visual representation of astrological data</p>
+                </div>
+                <div id="group" class="tabBloc mainBar" style="display:none">
+                    <h3>Groups</h3>
+                    <p>Family and other group interactions and charts</p>
+                </div>
+                <div id="network" class="tabBloc mainBar" style="display:none">
+                    <h3>Social network</h3>
+                    <p>Graph and details of your Astro network</p>
+                </div>
+            </div>
+            <div class="bottom">
+                Various links...
+            </div>
+        </div>
+    </body>
+</html>

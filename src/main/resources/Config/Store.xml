@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+    <AstroKeyspace></AstroKeyspace>
+        <AstroSchema>
+            <!-- Convention for edges to start lowercase, vertices to start uppercase -->
+            <!-- Edges connect Vertexes [just the one list!] -->
+            <EdgeTypes>
+                <type>majorBody</type>
+                <type>minorBody</type>
+                <type>majorBodyTranslate</type>
+                <type>zodiacTranslate</type>
+                <type>moon</type>
+                <type>has</type>
+                <type>follows</type>
+                <type>shares</type>
+                <type>tags</type>
+                <type>withElement</type>
+                <type>withMetal</type>
+                <type>withMe</type>
+                <type>linkPerson</type>
+            </EdgeTypes>
+            <!-- Just the one set of Entities -->
+            <Entities>
+                <!-- Links can be 'unidir' or 'bidir' only, default is UniDir -->
+                <VertexType type="Zodiac">
+                    <!-- Vertex has a link to other vertices with dirn unidir/bidir -->
+                    <link dirn="unidir">
+                        <!-- Link to which vertex? -->
+                        <incVertex>Elament</incVertex>
+                        <!-- edgeType that connects these vertices -->
+                        <edgeType>withElement</edgeType>
+                    </link>
+                    <link dirn="unidir">
+                        <edgeType>withMetal</edgeType>
+                        <incVertex>Metal</incVertex>
+                    </link>
+                </VertexType>
+                <VertexType type="Metal" />
+                <VertexType type="House" />
+                <VertexType type="Elament" />  <!-- Element is reserved word in JG -->
+                <VertexType type="Person">
+                    <link dirn="bidir">
+                        <edgeType>linkPerson</edgeType>
+                        <!-- linkIndex: Name or order (incr [default], decr, [no shuffle]) -->
+                        <linkIndex order="incr">PersonLinkIndex</linkIndex>
+                    </link>
+                    <link dirn="unidir">
+                        <edgeType>tags</edgeType>
+                    </link>
+                </VertexType>
+                <VertexType type="MajorBodies" />
+                <VertexType type="MinorBodies" />
+                <VertexType type="Moons" />
+                <VertexType type="Tag" />
+                <VertexType type="Languages" />
+            </Entities>
+        </AstroSchema>

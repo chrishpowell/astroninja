@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Chris Powell, Discoveri OU
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            line { stroke: green; }
+            text
+            {
+                text-anchor: middle;
+                font-family: "Helvetica Neue", Helvetica, sans-serif;
+                fill: black;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>Force</div>
+        <svg width="500" height="400" style="border:1px solid red;">
+            <g id="edges"></g>
+            <g id="nodes"></g>
+        </svg>
+        <script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+        <script>
+            var width = 500, height = 400;
+            var nodes = [ 
+                          {name:"Freda",r:10,fill:"lightgrey",ntype:"user"},
+                          {name:"Bill",r:10,fill:"lightgrey",ntype:"user"},
+                          {name:"Georgina",r:10,fill:"lightgrey",ntype:"user"},
+                          {name:"Henry",r:10,fill:"lightgrey",ntype:"user"},
+                          {name:"Arkady",r:10,fill:"lightgrey",ntype:"user"},
+                          {name:"Pisces",r:7,fill:"lightskyblue",ntype:"tag"},
+                          {name:"French wine",r:7,fill:"lightskyblue",ntype:"tag"},
+                          {name:"windows",r:7,fill:"lightskyblue",ntype:"tag"},
+                          {name:"",r:3,fill:"red",ntype:"unknown"}
+                         ];
+            var edges = [ 
+                            {source:0,target:1,etype:"follows"},
+                            {source:0,target:2,etype:"follows"},
+                            {source:2,target:3,etype:"follows"},
+                            {source:2,target:4,etype:"follows"},
+                            {source:1,target:7,etype:"tag"},
+                            {source:4,target:5,etype:"tag"},
+                            {source:4,target:6,etype:"tag"}
+                        ];
+            
+            var simulation = d3.forceSimulation(nodes)
+                    .force('charge', d3.forceManyBody())
+                    .force('center', d3.forceCenter(width / 2, height / 2))
+                    .force('link', d3.forceLink().links(edges))
+                    .on('tick', ticked);
+
+            function updateEdges()
+            {
+                var e = d3.select("#edges").selectAll("line").data(edges);
+                
+                e.enter()
+                    .append("line").merge(e)
+                    .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+            }
+            function updateNodes()
+            {
+                var n = d3.select('#nodes').selectAll('circle').data(nodes);
+
+                n.enter()
+                    .append('circle').merge(n)
+                    .attr('r', d => d.r)
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y)
+                    .attr("fill", d => d.fill);
+            
+                    n.append("text")
+                    .attr("x",d => d.x).attr("y",d => d.y)
+                    .text(d => d.name);
+
+                n.exit().remove();
+            }
+            
+            function ticked()
+            {
+                updateEdges();
+                updateNodes();
+            }
+        </script>
+    </body>
+</html>
